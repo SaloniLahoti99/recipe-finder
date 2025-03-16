@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Finder</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Recipe Finder 🍽️</h1>
+        <p>Find delicious recipes based on your ingredients!</p>
+    </header>
+
+
+    <form action="/search" method="POST">
+        <input type="text" name="ingredients" placeholder="Enter ingredients (comma-separated)...">
+        <button type="submit">🔍 Search</button>
+    </form>
+
+    <div class="recipe-gallery">
+        <% if (recipes.length > 0) { %>
+            <% recipes.forEach(recipe => { %>
+                <div class="recipe" data-name="<%= recipe.name.toLowerCase() %>">
+                    <a href="/recipe/<%= recipe.name.toLowerCase().replace(/ /g, '-') %>">
+                        <img src="<%= recipe.image %>" alt="<%= recipe.name %>">
+                        <h2><%= recipe.name %></h2>
+                        <p><%= recipe.description %></p>
+                    </a>
+                </div>
+            <% }) %>
+        <% } else { %>
+            <p>No recipes found. Try different ingredients!</p>
+        <% } %>
+    </div>
+
+</body>
+</html>
